@@ -5,71 +5,69 @@
 
 using namespace std;
 
+struct testcase
+{
+    int M;
+    int N;
+    int x;
+    int y;
+};
 
-
-int main() {
-    int n, m;
-    cin >> n >> m;
-
-    //1. input
-    vector<vector<int>> a(n+1,vector<int> (m+1));    
-    for (int i = 1; i <= n; i++){
-        for (int j = 1; j <= m; j++){
-            cin >> a[i][j];
-        }
+int lcd(int a, int b)
+{
+    int aOriginal = a;
+    int bOriginal = b;
+    int r;
+    while (b != 0)
+    {
+        r = a % b;
+        a = b;
+        b = r;
     }
-
-    int sumMax = 0;
-    int count = 0;
-
-    //2. check type-1
-    for (int i = 1; i <= n; i++){
-        for (int j = 1; j+3 <= m; j++){
-            sumMax = max(a[i][j] + a[i][j+1] + a[i][j+2] + a[i][j+3], sumMax); 
-            count++;
-        }
-    }
-    for (int i = 1; i+3 <= n; i++){
-        for (int j = 1; j <= m; j++){
-            sumMax = max(a[i][j] + a[i+1][j] + a[i+2][j] + a[i+3][j], sumMax); 
-            count++;
-        }
-    }
-
-    //3. check type-2
-    for (int i = 1; i+1 <= n; i++){
-        for (int j = 1; j+1 <= m; j++){
-            sumMax = max(a[i][j] + a[i][j+1] + a[i+1][j] + a[i+1][j+1], sumMax); 
-            count++;
-        }
-    }
-
-    //4. check type-3 (L shape)
-    for (int i = 1; i+2 <= n; i++){
-        for (int j = 1; j+1 <= m; j++){
-            for (int k =0; k<3; k++){
-                sumMax = max(a[i][j] + a[i+1][j] + a[i+2][j] + a[i+k][j+1], sumMax); 
-                sumMax = max(a[i][j+1] + a[i+1][j+1] + a[i+2][j+1] + a[i+k][j], sumMax);
-            }
-            sumMax = max(a[i][j] + a[i+1][j] + a[i+1][j+1] + a[i+2][j+1], sumMax); 
-            sumMax = max(a[i][j+1] + a[i+1][j] + a[i+1][j+1] + a[i+2][j], sumMax);
-            count++;
-        }
-    }
-
-    for (int i = 1; i+1 <= n; i++){
-        for (int j = 1; j+2 <= m; j++){
-            for (int k =0; k<3; k++){
-                sumMax = max(a[i][j] + a[i][j+1] + a[i][j+2] + a[i+1][j+k], sumMax); 
-                sumMax = max(a[i+1][j] + a[i+1][j+1] + a[i+1][j+2] + a[i][j+k], sumMax);
-            }
-            sumMax = max(a[i][j] + a[i][j+1] + a[i+1][j+1] + a[i+1][j+2], sumMax); 
-            sumMax = max(a[i+1][j] + a[i][j+1] + a[i+1][j+1] + a[i][j+2], sumMax);
-            count++;
-        }
-    }
-
-    cout << sumMax ;
-
+    return aOriginal * bOriginal / a;
 }
 
+int main()
+{
+    int T;
+    cin >> T;
+    // vector<testcase> testcases(T);
+
+    for (int t = 0; t < T; t++)
+    {
+        int M, N, x, y;
+        cin >> M >> N >> x >> y;
+
+        // 최소 공배수 구하기
+        // lcd(M, N);
+
+        // 최소 공배수까지 bruteForce하게 날짜 구하기
+
+        int count = 0;
+        bool find = false;
+
+        for (int i = x; i <= lcd(M, N); i += M)
+        {
+            int NCopy = i%N;
+            if (NCopy == 0) NCopy = N;
+
+            // cout << MCopy << " " << NCopy << endl;
+            if (NCopy == y)
+            {
+                find = true;
+                count = i;
+                break;
+            }
+        }
+
+        // -1 출력
+        if (find)
+        {
+            cout << count << "\n";
+        }
+        else
+        {
+            cout << -1 << "\n";
+        }
+    }
+}
