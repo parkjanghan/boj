@@ -62,6 +62,11 @@
     "array": "cpp",
     "new": "cpp",
     "iosfwd": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "*.tcc": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "span": "cpp"
   }
 }

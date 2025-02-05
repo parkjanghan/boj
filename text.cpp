@@ -1,73 +1,51 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
 
-using namespace std;
+// using namespace std;
+// int N;
+// vector<pair<int, int>> arr;
+// int maxPayment = 0;
 
-struct testcase
-{
-    int M;
-    int N;
-    int x;
-    int y;
-};
+// void dfs(int cnt, int paymentSum){
+//     if(cnt > N){
+//         // 날짜 오버 되는지 체크
+        
+//         maxPayment = max(maxPayment, paymentSum);
+//         cout << "paymentSum  : " << paymentSum << endl;
+//         return;
+//     } 
+//     for (int i = cnt; i <= N; i++){
+//         cout << "Cnt : " << i << endl;
+//         int nextCnt = i + arr[i].first;
+//         if (nextCnt <= N+1) paymentSum += arr[i].second;
+//         if (nextCnt == N && arr[nextCnt].first == 1){
+//             paymentSum += arr[nextCnt].second;
+//         }
+        
+//         dfs(nextCnt, paymentSum);
 
-int lcd(int a, int b)
-{
-    int aOriginal = a;
-    int bOriginal = b;
-    int r;
-    while (b != 0)
-    {
-        r = a % b;
-        a = b;
-        b = r;
-    }
-    return aOriginal * bOriginal / a;
-}
+//         if (nextCnt <= N) paymentSum -= arr[i].second;
+//     }
+// }
 
-int main()
-{
-    int T;
-    cin >> T;
-    // vector<testcase> testcases(T);
+// int main()
+// {
+//     ios::sync_with_stdio(false); cin.tie(NULL);
 
-    for (int t = 0; t < T; t++)
-    {
-        int M, N, x, y;
-        cin >> M >> N >> x >> y;
+//     //input
+//     cin >> N;
+//     arr.resize(N+1);
 
-        // 최소 공배수 구하기
-        // lcd(M, N);
+//     for (int i = 1; i<=N; i++){
+//         int counselTime, payment;
+//         cin >> counselTime >> payment;
+//         arr[i] = {counselTime, payment};
+//     }
+//     //dfs
+//     dfs(1, 0);
 
-        // 최소 공배수까지 bruteForce하게 날짜 구하기
+//     //print
+//     cout << maxPayment;
 
-        int count = 0;
-        bool find = false;
-
-        for (int i = x; i <= lcd(M, N); i += M)
-        {
-            int NCopy = i%N;
-            if (NCopy == 0) NCopy = N;
-
-            // cout << MCopy << " " << NCopy << endl;
-            if (NCopy == y)
-            {
-                find = true;
-                count = i;
-                break;
-            }
-        }
-
-        // -1 출력
-        if (find)
-        {
-            cout << count << "\n";
-        }
-        else
-        {
-            cout << -1 << "\n";
-        }
-    }
-}
+// }
